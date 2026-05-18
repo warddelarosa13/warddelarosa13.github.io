@@ -913,6 +913,112 @@
     }
     footer span { color: var(--gold); }
     /* =====================
+       LIGHT MODE
+    ===================== */
+    body.light-mode {
+      --navy:   #f0f4f8;
+      --navy2:  #ffffff;
+      --navy3:  #e8edf3;
+      --white:  #111827;
+      --w80:    rgba(17,24,39,0.80);
+      --w50:    rgba(17,24,39,0.55);
+      --w20:    rgba(17,24,39,0.12);
+      --w08:    rgba(17,24,39,0.05);
+      --border: rgba(17,24,39,0.12);
+      background: #f0f4f8;
+    }
+    body.light-mode nav {
+      background: rgba(240,244,248,0.92);
+      border-bottom: 1px solid rgba(17,24,39,0.10);
+    }
+    body.light-mode .nav-logo { color: #111827; }
+    body.light-mode .nav-links a { color: rgba(17,24,39,0.70); }
+    body.light-mode #home {
+      background: linear-gradient(135deg, #e8edf3 0%, #f0f4f8 100%);
+    }
+    body.light-mode #home::before {
+      background-image: radial-gradient(rgba(245,196,0,0.15) 1px, transparent 1px);
+    }
+    body.light-mode .hero-name { color: #111827; }
+    body.light-mode .hero-tagline { color: rgba(17,24,39,0.75); }
+    body.light-mode .section-heading { color: #111827; }
+    body.light-mode .about-text { color: rgba(17,24,39,0.75); }
+    body.light-mode .info-val { color: #111827; }
+    body.light-mode .skill-card {
+      background: #ffffff;
+      border-color: rgba(17,24,39,0.10);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    body.light-mode .skill-name { color: #111827; }
+    body.light-mode .skill-bar { background: rgba(17,24,39,0.10); }
+    body.light-mode .techskills-grid {
+      background: #ffffff;
+      border-color: rgba(17,24,39,0.10);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    body.light-mode .techskills-divider { background: rgba(17,24,39,0.10); }
+    body.light-mode .techskills-col-title { color: #111827; }
+    body.light-mode .techskill-item { color: rgba(17,24,39,0.80); }
+    body.light-mode .featured-project {
+      background: #ffffff;
+      border-color: rgba(17,24,39,0.10);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    body.light-mode .fp-bottom { background: #ffffff; }
+    body.light-mode .fp-desc { color: rgba(17,24,39,0.75); }
+    body.light-mode .tl-header {
+      background: #ffffff;
+      border-color: rgba(17,24,39,0.10);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    body.light-mode .tl-role { color: #111827; }
+    body.light-mode .tl-bullets li { color: rgba(17,24,39,0.65); }
+    body.light-mode .timeline::before { background: linear-gradient(to bottom, var(--gold), transparent); opacity: 0.4; }
+    body.light-mode .contact-card {
+      background: #ffffff;
+      border-color: rgba(17,24,39,0.10);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    body.light-mode .contact-lbl { color: rgba(17,24,39,0.50); }
+    body.light-mode .contact-val { color: #111827; }
+    body.light-mode .contact-intro { color: rgba(17,24,39,0.75); }
+    body.light-mode .section-divider { background: rgba(17,24,39,0.10); }
+    body.light-mode footer { color: rgba(17,24,39,0.50); }
+    body.light-mode .fp-split-right { background: linear-gradient(135deg, #e8edf3, #f0f4f8); }
+    body.light-mode .fp-split-title { color: #111827; }
+    body.light-mode .fp-mlb-subtitle { color: rgba(17,24,39,0.55); }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(245,196,0,0.4);
+      z-index: 9000;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(20deg);
+      box-shadow: 0 6px 28px rgba(245,196,0,0.6);
+    }
+    body.light-mode .theme-toggle {
+      background: #111827;
+      color: var(--gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+
+    /* =====================
        MOBILE RESPONSIVE
     ===================== */
     @media (max-width: 768px) {
@@ -1446,6 +1552,11 @@
   &copy; 2026 <span>Edward Delarosa</span> · Data Analyst Portfolio
 </footer>
 
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+  <i class="ti ti-sun" id="theme-icon"></i>
+</button>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-inner">
@@ -1460,6 +1571,24 @@
 </div>
 
 <script>
+  /* Theme toggle */
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon   = document.getElementById('theme-icon');
+  const body        = document.body;
+
+  // Check saved preference
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+    themeIcon.className = 'ti ti-moon';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    themeIcon.className = isLight ? 'ti ti-moon' : 'ti ti-sun';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+
   /* Scroll reveal */
   const reveals = document.querySelectorAll('.reveal');
   const skillFills = document.querySelectorAll('.skill-fill');
