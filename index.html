@@ -1648,18 +1648,21 @@
   // Project 02 view buttons
   const leadsBtn = document.getElementById('leads-view-btn');
   if (leadsBtn) {
-    const leadsImg = document.querySelector('#projects .fp-screenshots img');
-    if (leadsImg) {
-      leadsBtn.addEventListener('click', () => openLightboxSrc(leadsImg.src, 'Facebook Leads Dashboard — Overview'));
-    }
+    leadsBtn.addEventListener('click', () => {
+      const shotImgs = document.querySelectorAll('#projects .fp-screenshots .fp-shot img');
+      if (shotImgs.length > 0) {
+        openLightboxSrc(shotImgs[0].src, 'Facebook Leads Dashboard — Overview');
+      }
+    });
   }
   const leadsBtn2 = document.getElementById('leads-view-btn2');
   if (leadsBtn2) {
-    const shotImgs = document.querySelectorAll('#projects .fp-screenshots img');
-    if (shotImgs.length > 0) {
-      const pipelineImg = shotImgs[shotImgs.length - 1];
-      leadsBtn2.addEventListener('click', () => openLightboxSrc(pipelineImg.src, 'Facebook Leads Dashboard — Pipeline & Funnel'));
-    }
+    leadsBtn2.addEventListener('click', () => {
+      const shotImgs = document.querySelectorAll('#projects .fp-screenshots .fp-shot img');
+      if (shotImgs.length > 1) {
+        openLightboxSrc(shotImgs[shotImgs.length - 1].src, 'Facebook Leads Dashboard — Pipeline & Funnel');
+      }
+    });
   }
 </script>
 </body>
